@@ -3,6 +3,7 @@ import styles from '../games/page.css'
 import Card from 'react-bootstrap/Card';
 import {Button, Badge }from 'react-bootstrap';
 
+
 export default function games() {
     return (
         <div className="latar">
