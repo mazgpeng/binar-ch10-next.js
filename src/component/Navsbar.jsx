@@ -1,15 +1,18 @@
 "use client"
-
 import React, { useEffect, useState } from "react";
+
+import {useRouter} from 'next/navigation'
 import Link from "next/link"
+
 import { Navbar, Button, Text} from "@nextui-org/react";
 import { getAuth, updateProfile, onAuthStateChanged,signOut } from "firebase/auth";
 import app from '@/service/firebase';
-import { AcmeLogo } from "./nextui/AcmeLogo";
+import { AcmeLogo } from "@/component/nextui/AcmeLogo.jsx";
 import {Modal }from 'react-bootstrap';
 
 export default function Navsbar() {
     const auth = getAuth(app)
+    const navigate = useRouter()
     const [isLogin, setisLogin] = useState(false)
     const [users, setUsers] = useState();
     
@@ -36,8 +39,8 @@ export default function Navsbar() {
 
         }).then(() => {
             localStorage.removeItem('token')
-            navigate('/login')
-            navigate(0)
+            navigate.push('/login')
+            navigate.push(0)
 
         }).catch((error) => {
             alert("something wrong");
@@ -53,21 +56,20 @@ export default function Navsbar() {
     ];
     return (
         <>
-            {isLogin ?
-                <Navbar isBordered variant="sticky" css={{ color: "gray" }} height="80px">
+                <Navbar isBordered variant= "sticky" style={{ color: "grey" }} height="80px">
 
                     <Navbar.Brand>
                         <Navbar.Toggle showIn="xs" aria-label="toggle navigation" />
                         <AcmeLogo />
                         <Text b color="inherit" hideIn="xs">
-                            <Link css={{ color: "gray" }} to="/" as={NavLink}>GameStation™</Link>
+                        <Link style ={{ color: "grey" }} href="/" >GameStation™</Link>
                         </Text>
                     </Navbar.Brand>
 
                     <Navbar.Content enableCursorHighlight hideIn="xs" variant="highlight-solid-rounded" activeColor="secondary">
-                        <Navbar.Link href ="/home"> Home </Navbar.Link>
-                        <Navbar.Link href ="/games"> Games</Navbar.Link>
-                        <Navbar.Link href ="/profile"> Profile</Navbar.Link>
+                        <Navbar.Link onClick={() => navigate.push("/home")}> Home </Navbar.Link>
+                        <Navbar.Link onClick={() => navigate.push("/games")}> Games</Navbar.Link>
+                        <Navbar.Link onClick={() => navigate.push("/profile")}> Profile</Navbar.Link>
                     </Navbar.Content>
                     <Navbar.Content>
                         <Navbar.Item>
@@ -91,7 +93,7 @@ export default function Navsbar() {
                     <Navbar.Collapse showIn={"xs"}>
                         {collapseItems.map((item, index) => (
                             <Navbar.CollapseItem key={item}>
-                                <Link as={NavLink}
+                                <Link as={Link}
                                     color="inherit"
                                     css={{
                                         minWidth: "100%",
@@ -105,27 +107,27 @@ export default function Navsbar() {
                     </Navbar.Collapse>
 
                 </Navbar>
-                :
+                {/* :
                 <Navbar isBordered variant="sticky" css={{ color: "gray" }} height="80px">
 
                     <Navbar.Brand>
                         <Navbar.Toggle showIn="xs" aria-label="toggle navigation" />
                         <AcmeLogo />
                         <Text b color="inherit" hideIn="xs">
-                            <Link css={{ color: "gray" }} href="/">GameStation™</Link>
+                            <Link style={{ color: "gray" }} to="/" as={Link}>GameStation™</Link>
                         </Text>
                     </Navbar.Brand>
 
                     <Navbar.Content enableCursorHighlight hideIn="xs" variant="highlight-solid-rounded" activeColor="secondary">
-                        <Navbar.Link href ="/home"> Home </Navbar.Link>
-                        <Navbar.Link href ="/games"> Games</Navbar.Link>
+                        <Navbar.Link to="/home"> Home </Navbar.Link>
+                        <Navbar.Link to="/games"> Games</Navbar.Link>
                     </Navbar.Content>
                     <Navbar.Content>
-                        <Navbar.Link color="inherit" href="/login">
+                        <Navbar.Link color="inherit"  to="/login">
                             Login
                         </Navbar.Link>
                         <Navbar.Item>
-                            <Button color="secondary" auto flat href="/register">
+                            <Button color="secondary" auto flat  to="/register">
                                 Sign Up
                             </Button>
                         </Navbar.Item>
@@ -135,7 +137,7 @@ export default function Navsbar() {
                     <Navbar.Collapse showIn={"xs"}>
                         {collapseItems.map((item, index) => (
                             <Navbar.CollapseItem key={item}>
-                                <Link
+                                <Link as={Link}
                                     color="inherit"
                                     css={{
                                         minWidth: "100%",
@@ -148,9 +150,9 @@ export default function Navsbar() {
                         ))}
                     </Navbar.Collapse>
 
-                </Navbar>
-            }
-            <Modal show={show} onHide={handleClose}>
+                </Navbar> */}
+
+            {/* <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Logout</Modal.Title>
                     </Modal.Header>
@@ -163,7 +165,7 @@ export default function Navsbar() {
                     Logout
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
 
         </>
 
