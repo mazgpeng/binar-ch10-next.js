@@ -1,5 +1,6 @@
 "use client"
 import { Text,Button, Grid  } from "@nextui-org/react";
+import {useRouter} from 'next/navigation';
 import Image from "next/image";
 import css from '../page.module.css'
 import styles from './detail.css';
@@ -7,6 +8,9 @@ import suit from '../images/janken.png';
 
 
 export default function gamesDetail(){
+
+    const navigate = useRouter()
+    
     return (
         <>
         <div className={css.heroImage}>

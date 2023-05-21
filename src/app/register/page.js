@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Input, Button, Grid, Text  } from '@nextui-org/react';
 import Modal from 'react-bootstrap/Modal';
+import css from '../page.module.css'
+import styles from './register.css';
 
 export default function register () {
     const [smShow, setSmShow] = useState(false);
@@ -13,8 +15,27 @@ export default function register () {
         email: '',
         password: ''
     })
+
+    async function handleSignUp() {
+        try {
+            const auth = getAuth(app)
+            await createUserWithEmailAndPassword(auth, credential.email, credential.password)
+            setSuccess(true);
+        } catch (error) {
+            console.log(error)
+            setError(error.message);
+        }
+    }
+
+    function handleChangeInput(e, type) {
+        let value = e.target.value
+        let temp = { ...credential }
+        temp[type] = value
+        setCredential(temp)
+    }
     
     return (
+        <div className={css.heroImage}>
         <div className="latar">
             <div className="container">
                 <div className="register">
@@ -41,7 +62,7 @@ export default function register () {
                     </>
                 </div>
             </div>
-
+        </div>
     </div>
     )
 }

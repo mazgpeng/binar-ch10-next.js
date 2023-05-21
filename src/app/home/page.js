@@ -48,7 +48,7 @@ export default function home(){
                             defeated by scissors. The person whose gesture defeats the other
                             is selected.
                         </p>
-                        <Button css={{ mb: "$10" }} shadow bordered color="gradient" auto onClick={() => navigate("/games")}>
+                        <Button css={{ mb: "$10" }} shadow bordered color="gradient" auto onClick={() => navigate.push("/games")}>
                         Play Now!
                         </Button>
                         </div>
@@ -67,7 +67,7 @@ export default function home(){
                         <Card.Body>
                         <Text justify="center" align="center" h1>Please Login To View This Page!</Text>
                         <Spacer y={0.5} />
-                        <Button onClick={() => navigate('/login')} xs css={{ mb: "$10" }} shadow bordered color="gradient" auto>
+                        <Button onClick={() => navigate.push('/login')} xs css={{ mb: "$10" }} shadow bordered color="gradient" auto>
                             Login
                         </Button>
                         </Card.Body>

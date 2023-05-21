@@ -1,10 +1,20 @@
 "use client"
 import { useState } from "react";
+import {useRouter} from 'next/navigation';
+import app from '@/service/firebase';
+import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { Input, Button, Grid, Text  } from '@nextui-org/react';
 import Modal from 'react-bootstrap/Modal';
-import GoogleButton from 'react-google-button'
+import GoogleButton from 'react-google-button';
+import css from '../page.module.css'
+import styles from './login.css';
+
+const auth = getAuth(app)
+const provider = new GoogleAuthProvider();
 
 export default function login() {
+
+    const navigate = useRouter()
 
     const [error, setError] = useState('')
     const [smShow, setSmShow] = useState(false);
@@ -14,7 +24,64 @@ export default function login() {
         email: '',
         password: ''
     })
+
+    async function handleLogin() {
+        if (!credential.email) {
+            setError("Email is required")
+            return
+        }
+        if (!credential.password) {
+            setError("Password is required")
+            return
+        }
+        try {
+            const login = await signInWithEmailAndPassword(auth, credential.email, credential.password)
+            const token = login.user.accessToken
+            localStorage.setItem('token', token)
+            setSuccess(true);
+            setError('');
+            setSmShow(true);
+            setTimeout(() => {
+                navigate.push('/home');
+                navigate.push(0);
+            }, 1500);
+
+        } catch (error) {
+            setError("Wrong Password/Email")
+            setSuccess(false);
+            setSmShow(true);
+        }
+    }
+
+    async function loginWithGoogle() {
+        auth.languageCode = 'it'
+        signInWithPopup(auth, provider)
+            .then(result => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken
+                localStorage.setItem('token', token)
+                setTimeout(() => {
+                    navigate.push('/home');
+                    navigate.push(0);
+                }, 1500);
+
+
+            })
+            .catch(err => {
+                setError('something wrong')
+            })
+    }
+
+    function handleChangeInput(e, type) {
+        let value = e.target.value
+        let temp = { ...credential }
+        temp[type] = value
+        setCredential(temp)
+    }
+
     return (
+
+        <div className={css.heroImage}>
         <div className="latar">
             <div className="container">
                 <div className="form-group">
@@ -56,10 +123,11 @@ export default function login() {
                             </Modal>
                         )}
                         <h3>Don't Have Account?</h3>
-                        <Button onClick={() => navigate("/register")} auto color="success"> Register </Button>
+                        <Button onClick={() => navigate.push("/register")} auto color="success"> Register </Button>
                         </>
                 </div>
             </div>
+        </div>
     </div>
     )
 }
