@@ -1,4 +1,7 @@
-.latar {
-  background-image: url("/src/images/background.jpeg")
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding:  93.3px;
 }
+
 
