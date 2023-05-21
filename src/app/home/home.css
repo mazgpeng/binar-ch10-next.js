@@ -1,0 +1,30 @@
+.formhome{
+    padding-bottom: 225px;
+}
+
+.home-content {
+    background-image: linear-gradient(to bottom, rgba(39, 157, 236, 0.507), rgba(255, 0, 0, 0.712));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.home-left {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+
+.home-box-game {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ffffff;
+}
+
+
+.home-box-game img {
+    max-width: 200px;
+}

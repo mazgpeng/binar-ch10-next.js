@@ -1,0 +1,13 @@
+.formgmlist{
+    padding-top: 20px;
+    padding-bottom: 120px;
+}
+
+.card{
+    align-items:center ;
+    text-align: center;
+    background-image: linear-gradient(to top right, rgba(22, 43, 236, 0.856), rgba(224, 16, 16, 0.877));
+    border-radius: 40px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}

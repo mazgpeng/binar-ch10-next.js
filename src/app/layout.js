@@ -1,8 +1,10 @@
 "use client"
 import './globals.css'
+import React from 'react';
 import { Inter } from 'next/font/google'
 import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from '@/store/providers'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navsbar from "@/component/Navsbar";
 
 

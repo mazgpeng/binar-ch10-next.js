@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { Text, Container, Row, Button, Spacer, Card, Col, useSSR } from "@nextui-org/react";
 import { getAuth, onAuthStateChanged } from "firebase/auth"
+import Image from "next/image";
+import css from '../page.module.css'
+import styles from './home.css';
+import suit from '../images/suit.jpg';
 
 
 export default function home(){
@@ -19,8 +23,9 @@ export default function home(){
 
 
     return (
-        <>
-            {isLogin ?
+        <>  
+            
+            <div className={css.heroImage}>
                 <div className="latar">
                 <div className="container">
                     <div className="formhome">
@@ -29,7 +34,7 @@ export default function home(){
                     <p className="home-left text-light">Recomended Game For You</p>
                         <div className="home-box-game mb-3 rounded border">
                         <div className="p-3">
-                            <img src={suit}></img>
+                            <Image src={suit} height={100} width={100} alt=""/>
                         </div>
                         <div className="p-3 text-light home-detail">
                         <Text h3 size={60}css={{textGradient: "45deg, $purple600 -20%, $pink600 100%",}}weight="bold"
@@ -51,7 +56,8 @@ export default function home(){
                     </div>
                     </div>
                 </div>
-                <Footer />
+                {/* <Footer /> */}
+                </div>
                 </div>
                 :
                 <Container xs css={{ mt: "$40" }} >
@@ -59,7 +65,7 @@ export default function home(){
                     <Col justify="center" align="center">
                     <Card css={{ $$cardColor: 'white' }}>
                         <Card.Body>
-                        <Text justify="center" align="center" h1>Please Login To View Page!</Text>
+                        <Text justify="center" align="center" h1>Please Login To View This Page!</Text>
                         <Spacer y={0.5} />
                         <Button onClick={() => navigate('/login')} xs css={{ mb: "$10" }} shadow bordered color="gradient" auto>
                             Login
@@ -69,8 +75,9 @@ export default function home(){
                     </Col>
                 </Row>
                 </Container>
-            }
-        </>
-    
-      );
+                
+            
+            
+        </>   
+    );
 }
