@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { Text, Container, Row, Button, Spacer, Card, Col, useSSR } from "@nextui-org/react";
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {useRouter} from 'next/navigation';
 import Image from "next/image";
 import css from '../page.module.css'
 import styles from './home.css';
@@ -10,6 +11,8 @@ import suit from '../images/suit.jpg';
 
 
 export default function home(){
+
+    const navigate = useRouter()
     const [isLogin, setisLogin] = useState(false)
 
     useEffect(() => {
