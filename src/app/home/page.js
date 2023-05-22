@@ -27,7 +27,7 @@ export default function home(){
 
     return (
         <>  
-            
+            {isLogin ?
             <div className={css.heroImage}>
                 <div className="latar">
                 <div className="container">
@@ -78,9 +78,7 @@ export default function home(){
                     </Col>
                 </Row>
                 </Container>
-                
-            
-            
+            }
         </>   
     );
 }

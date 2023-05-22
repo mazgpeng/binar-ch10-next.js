@@ -40,7 +40,6 @@ export default function Navsbar() {
         }).then(() => {
             localStorage.removeItem('token')
             navigate.push('/login')
-            navigate.push()
 
         }).catch((error) => {
             alert("something wrong");
