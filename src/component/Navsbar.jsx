@@ -40,10 +40,11 @@ export default function Navsbar() {
         }).then(() => {
             localStorage.removeItem('token')
             navigate.push('/login')
-            navigate.push(0)
+            navigate.push()
 
         }).catch((error) => {
             alert("something wrong");
+            console.log(error)
         });
     };
 
@@ -56,17 +57,18 @@ export default function Navsbar() {
     ];
     return (
         <>
+            {isLogin ?
                 <Navbar isBordered variant= "sticky" style={{ color: "grey" }} height="80px">
 
                     <Navbar.Brand>
                         <Navbar.Toggle showIn="xs" aria-label="toggle navigation" />
                         <AcmeLogo />
                         <Text b color="inherit" hideIn="xs">
-                        <Link style ={{ color: "grey" }} href="/" >GameStation™</Link>
+                            <Link style={{ color: "grey" }} href="/" >GameStation™</Link>
                         </Text>
                     </Navbar.Brand>
 
-                    <Navbar.Content enableCursorHighlight hideIn="xs" variant="highlight-solid-rounded" activeColor="secondary">
+                    <Navbar.Content hideIn="xs" variant="default" activeColor="primary">
                         <Navbar.Link onClick={() => navigate.push("/home")}> Home </Navbar.Link>
                         <Navbar.Link onClick={() => navigate.push("/games")}> Games</Navbar.Link>
                         <Navbar.Link onClick={() => navigate.push("/profile")}> Profile</Navbar.Link>
@@ -74,12 +76,12 @@ export default function Navsbar() {
                     <Navbar.Content>
                         <Navbar.Item>
                             <>
-                            <Text color="purple" auto flat>
-                                Welcome &nbsp; 
-                            </Text>
-                            <Text color="purple" auto flat>
-                               {users && <p>{users.displayName}</p>}
-                            </Text>
+                                <Text color="purple" auto flat>
+                                    Welcome &nbsp; 
+                                </Text>
+                                <Text color="purple" auto flat>
+                                    {users && <p>{users.displayName}</p>}
+                                </Text>
                             </>
                         </Navbar.Item>
                         <Navbar.Item>
@@ -106,31 +108,32 @@ export default function Navsbar() {
                         ))}
                     </Navbar.Collapse>
 
-                </Navbar>
-                {/* :
-                <Navbar isBordered variant="sticky" css={{ color: "gray" }} height="80px">
+                </Navbar >
+                :
+                < Navbar isBordered variant="sticky" style={{ color: "grey" }} height="80px">
 
                     <Navbar.Brand>
                         <Navbar.Toggle showIn="xs" aria-label="toggle navigation" />
                         <AcmeLogo />
                         <Text b color="inherit" hideIn="xs">
-                            <Link style={{ color: "gray" }} to="/" as={Link}>GameStation™</Link>
+                            <Link style={{ color: "grey" }} href="/" >GameStation™</Link>
                         </Text>
                     </Navbar.Brand>
 
-                    <Navbar.Content enableCursorHighlight hideIn="xs" variant="highlight-solid-rounded" activeColor="secondary">
-                        <Navbar.Link to="/home"> Home </Navbar.Link>
-                        <Navbar.Link to="/games"> Games</Navbar.Link>
+                    <Navbar.Content hideIn="xs" variant="default" activeColor="primary">
+                        <Navbar.Link onClick={() => navigate.push("/home")}> Home </Navbar.Link>
+                        <Navbar.Link onClick={() => navigate.push("/games")}> Games</Navbar.Link>
                     </Navbar.Content>
                     <Navbar.Content>
-                        <Navbar.Link color="inherit"  to="/login">
+                        <Navbar.Link color="inherit" onClick={() => navigate.push("/login")}>
                             Login
                         </Navbar.Link>
                         <Navbar.Item>
-                            <Button color="secondary" auto flat  to="/register">
+                            <Button color="secondary" auto flat onClick={() => navigate.push("/register")}>
                                 Sign Up
                             </Button>
                         </Navbar.Item>
+
 
                     </Navbar.Content>
 
@@ -150,22 +153,23 @@ export default function Navsbar() {
                         ))}
                     </Navbar.Collapse>
 
-                </Navbar> */}
+                </Navbar > 
 
-            {/* <Modal show={show} onHide={handleClose}>
+            }
+            <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Logout</Modal.Title>
                     </Modal.Header>
                         <Modal.Body>Are you sure you want to sign out?</Modal.Body>
                             <Modal.Footer>
-                        <Button color="secondary" onClick={handleClose}>
+                        <Button color="secondary" onPress={handleClose}>
                             Cancel
                         </Button>
                     <Button color="error" onClick={handleClose} onPress={signout}>
                     Logout
                     </Button>
                 </Modal.Footer>
-            </Modal> */}
+            </Modal> 
 
         </>
 
