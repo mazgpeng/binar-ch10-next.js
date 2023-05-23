@@ -12,15 +12,18 @@ import app from '@/service/firebase';
 import { AcmeLogo } from "@/component/nextui/AcmeLogo.jsx";
 import { Modal } from 'react-bootstrap';
 import { changeState } from "@/store/reducer/loginReducer";
+import { changeDispname,changeEmail,changeUid} from "@/store/reducer/userfReducer";
 import { Router } from "next/router";
 
 export default function Navsbar() {
     const auth = getAuth(app)
     const navigate = useRouter()
     const loginState = useSelector(state => state.loginReducer)
+    const userfState = useSelector(state => state.userfReducer)
+
     const dispatch = useDispatch()
     // const [isLogin, setisLogin] = useState(false)
-    const [users, setUsers] = useState();
+    // const [users, setUsers] = useState();
 
     const [show, setShow] = useState(false);
 
@@ -36,7 +39,10 @@ export default function Navsbar() {
 
     useEffect(() => {
         onAuthStateChanged(auth, (data) => {
-            setUsers(data)
+            console.log(data);
+            dispatch(changeDispname(data?.displayName))
+            dispatch(changeEmail(data?.email))
+            dispatch(changeUid(data?.uid))
         });
     }, [])
 
@@ -63,7 +69,7 @@ export default function Navsbar() {
         <>
             {loginState.isLogin ?
                 <Navbar isBordered variant="sticky" style={{ color: "grey" }} height="80px">
-                    
+
                     <Navbar.Brand>
                         <Navbar.Toggle showIn="xs" aria-label="toggle navigation" />
                         <AcmeLogo />
@@ -84,7 +90,7 @@ export default function Navsbar() {
                                     Welcome &nbsp;
                                 </Text>
                                 <Text color="purple" auto flat>
-                                    {users && <p>{users.displayName}</p>}
+                                    {userfState.displayName} 
                                 </Text>
                             </>
                         </Navbar.Item>
