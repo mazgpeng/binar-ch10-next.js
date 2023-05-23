@@ -43,7 +43,6 @@ export default function login() {
             setSmShow(true);
             setTimeout(() => {
                 navigate.push('/home');
-
             }, 1500);
 
         } catch (error) {
@@ -62,7 +61,6 @@ export default function login() {
                 localStorage.setItem('token', token)
                 setTimeout(() => {
                     navigate.push('/home');
-
                 }, 1500);
 
 

@@ -20,12 +20,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-      <React.StrictMode>
-          <NextUIProvider>
-            <Navsbar/>
+        <React.StrictMode>
+          <Providers>
+            <NextUIProvider>
+              <Navsbar />
+
               {children}
-          </NextUIProvider>
-          </React.StrictMode>
+
+            </NextUIProvider>
+          </Providers>
+        </React.StrictMode>
       </body>
     </html>
   )
