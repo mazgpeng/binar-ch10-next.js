@@ -5,7 +5,8 @@ const userfSLice = createSlice({
     initialState: {
         displayName: "",
         email : "",
-        uid : ""
+        uid : "",
+        photoURL : "",
         
     },
     reducers: {
@@ -20,6 +21,10 @@ const userfSLice = createSlice({
         changeUid: (state, payload) => {
             console.log(payload);
             state.uid = payload.payload
+        },
+        changePhotoURL: (state, payload) => {
+            console.log(payload);
+            state.photoURL = payload.payload
         }
     }
 

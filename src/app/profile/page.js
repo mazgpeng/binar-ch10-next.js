@@ -1,6 +1,7 @@
 "use client"
 import { Text, Container, Card, Row, Spacer,Col, Button } from "@nextui-org/react"
 import React, { useEffect, useState } from "react";
+import {useSelector} from 'react-redux'
 import {useRouter} from 'next/navigation';
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import app from '@/service/firebase';
@@ -8,26 +9,28 @@ import app from '@/service/firebase';
 export default function profile () {
     const navigate = useRouter()
     const auth = getAuth(app)
-    const [isLogin, setisLogin] = useState(false)
+    const loginState = useSelector(state => state.loginReducer)
+    const userfState = useSelector(state => state.userfReducer)
+    // const [isLogin, setisLogin] = useState(false)
 
-    useEffect(() => {
-        let token = localStorage.getItem('token')
-        if (token) {
-            setisLogin(true)
-        }
-    }, [])
+    // useEffect(() => {
+    //     let token = localStorage.getItem('token')
+    //     if (token) {
+    //         setisLogin(true)
+    //     }
+    // }, [])
 
-    const [users, setUsers] = useState()
+    // const [users, setUsers] = useState()
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (data) => {
-            setUsers(data)
-        });
-    }, [])
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (data) => {
+    //         setUsers(data)
+    //     });
+    // }, [])
     
     return (
         <>
-        {isLogin ?
+        {loginState.isLogin ?
             <Container xl >
                 <Card css={{ $$cardColor: 'gray' }}>
                     <Card.Body>
@@ -37,7 +40,7 @@ export default function profile () {
                             </Text>
                             <Spacer y={2} />
                             <Text h6 size={15} color="white" css={{ m: 0 }}>
-                            {users && <p>{users.uid}</p>}
+                            {userfState.uid}
                             </Text>
                         </Row>
                         <Row justify="center" align="center">
@@ -46,7 +49,7 @@ export default function profile () {
                             </Text>
                             <Spacer y={2} />
                             <Text h6 size={15} color="white" css={{ m: 0 }}>
-                            {users && <p>{users.email}</p>}
+                            {userfState.email}
                             </Text>
                         </Row>
                         <Row justify="center" align="center">
@@ -55,7 +58,7 @@ export default function profile () {
                             </Text>
                             <Spacer y={2} />
                             <Text h6 size={15} color="white" css={{ m: 0 }}>
-                            {users && <p>{users.displayName}</p>}
+                            {userfState.displayName}
                             </Text>
                         </Row>
                     
@@ -65,7 +68,7 @@ export default function profile () {
                             </Text>
                             <Spacer y={2} />
                             <Text h6 size={15} color="white" css={{ m: 0 }}>
-                            {users && <p>{users.photoURL}</p>}
+                            {/* {users && <p>{users.photoURL}</p>} */}
                             </Text>
                         </Row>
                         <Row justify="center" align="center">

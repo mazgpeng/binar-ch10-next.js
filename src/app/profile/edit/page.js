@@ -1,40 +1,47 @@
 "use client"
 import { Text, Container, Card, Row, Spacer, Col, Button, Input } from "@nextui-org/react"
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { changeDispname,changeEmail,changeUid,changePhotoURL} from "@/store/reducer/userfReducer";
 import { getAuth, updateProfile, onAuthStateChanged } from "firebase/auth"
 import app from '@/service/firebase';
-import {useRouter} from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-export default function profileEdit () {
+export default function profileEdit() {
     const auth = getAuth(app)
     const navigate = useRouter()
-    const [isLogin, setisLogin] = useState(false)
+    const dispatch = useDispatch()
+    const loginState = useSelector(state => state.loginReducer)
+    const userfState = useSelector(state => state.userfReducer)
+    // const [isLogin, setisLogin] = useState(false)
 
-    useEffect(() => {
-        let token = localStorage.getItem('token')
-        if (token) {
-            setisLogin(true)
-        }
-    }, [])
+    // useEffect(() => {
+    //     let token = localStorage.getItem('token')
+    //     if (token) {
+    //         setisLogin(true)
+    //     }
+    // }, [])
 
-    const [users, setUsers] = useState();
+    // const [users, setUsers] = useState();
     const [profile, setProfile] = useState({
         name: "",
         avatar: "",
     })
 
-    useEffect(() => {
-        onAuthStateChanged(auth, (data) => {
-            setUsers(data)
-        });
-    }, [])
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (data) => {
+    //         setUsers(data)
+    //     });
+    // }, [])
 
     function updatedata() {
         updateProfile(auth.currentUser, {
             displayName: profile.name,
-            photoURL: profile.avatar
+            photoURL: profile.avatar,
 
-        }).then(() => {
+        }).then(() => {  
+            dispatch(changeDispname(profile.name))
+            dispatch(changePhotoURL(profile.avatar))  
             alert('profile updated');
             navigate.push('/profile')
         }).catch((error) => {
@@ -50,8 +57,8 @@ export default function profileEdit () {
     }
 
     return (
-            <>
-            {isLogin ?
+        <>
+            {loginState.isLogin ?
                 <Container xl >
                     <Card css={{ $$cardColor: 'gray' }}>
                         <Card.Body>
@@ -60,9 +67,8 @@ export default function profileEdit () {
                                     UID :
                                 </Text>
                                 <Spacer y={2} />
-                                {users && <>
-                                    <Input readOnly placeholder="Disabled" value={users.uid} />
-                                </>}
+                                    <Input readOnly placeholder="Disabled" value={userfState.uid}
+                                    />
 
                             </Row>
                             <Spacer y={0.3} />
@@ -72,9 +78,7 @@ export default function profileEdit () {
                                     Email :
                                 </Text>
                                 <Spacer y={2} />
-                                {users && <>
-                                    <Input readOnly placeholder="Disabled" value={users.email} />
-                                </>}
+                                <Input readOnly placeholder="Disabled" value={userfState.email} />
 
                             </Row>
                             <Spacer y={0.3} />
@@ -84,9 +88,8 @@ export default function profileEdit () {
                                     Name :
                                 </Text>
                                 <Spacer y={2} />
-                                {users && <>
-                                    <Input placeholder="Name" clearable initialValue={users.displayName} onChange={(e) => handleChangeInput(e, 'name')} />
-                                </>}
+                                    <Input placeholder="Name" clearable initialValue={userfState.displayName} onChange={(e) => handleChangeInput(e, 'name')} />
+                              
                             </Row>
                             <Spacer y={0.3} />
 
@@ -96,10 +99,8 @@ export default function profileEdit () {
                                 <Text h6 size={15} color="white" css={{ m: 0 }}>
                                     Avatar :
                                 </Text>
-                                <Spacer y={2} />
-                                {users && <>
-                                    <Input placeholder="Input Image Url" clearable initialValue={users.photoURL} onChange={(e) => handleChangeInput(e, 'avatar')} />
-                                </>}
+                                <Spacer y={2} />                          
+                                    <Input placeholder="Input Image Url" clearable initialValue={userfState.photoURL} onChange={(e) => handleChangeInput(e, 'avatar')} />
 
                             </Row>
                             <Spacer y={0.3} />
