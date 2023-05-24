@@ -34,7 +34,7 @@ export default function Navsbar() {
         let token = localStorage.getItem('token')
         if (token) {
             dispatch(changeState(true))
-        }
+         }
     }, [])
 
     useEffect(() => {

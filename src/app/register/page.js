@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { getAuth, updateProfile, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword} from "firebase/auth"
 import app from '@/service/firebase';
 import { Input, Button, Grid, Text  } from '@nextui-org/react';
 import Modal from 'react-bootstrap/Modal';
