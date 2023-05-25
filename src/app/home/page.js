@@ -41,7 +41,8 @@ export default function home(){
                 <div className="container">
                     <div className="formhome">
                     <div className="container home-content rounded p-3 shadow">
-                    <h4 className="home-left text-light">Hi, Welcome {users && <span className="user-display-name">{users.displayName}</span>} </h4>
+                    <h4 className="home-left text-light">Hi, Welcome  </h4>
+                    {users && <span className="user-display-name">{users.displayName}</span>}
                     <p className="home-left text-light">Recomended Game For You</p>
                         <div className="home-box-game mb-3 rounded border">
                         <div className="p-3">

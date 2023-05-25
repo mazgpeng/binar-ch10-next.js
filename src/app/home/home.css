@@ -36,5 +36,6 @@
 .user-display-name {
     font-size: xx-large;
     font-weight: bolder;
+    font-style: italic;
     color: rgb(85, 7, 212);
 }
