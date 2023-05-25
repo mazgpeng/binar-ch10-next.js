@@ -1,5 +1,5 @@
 .formhome{
-    padding-bottom: 225px;
+    padding-bottom: 125px;
 }
 
 .home-content {
@@ -27,4 +27,15 @@
 
 .home-box-game img {
     max-width: 200px;
+}
+
+.pleaselogin{
+    padding-bottom: 369px;
+}
+
+.user-display-name {
+    font-size: xx-large;
+    font-weight: bolder;
+    font-style: italic;
+    color: rgb(85, 7, 212);
 }

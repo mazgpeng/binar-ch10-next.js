@@ -7,6 +7,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import { Providers } from '@/store/providers'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navsbar from "@/component/Navsbar";
+import Footer from '@/component/Footer';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
 
               {children}
 
+              <Footer />
             </NextUIProvider>
           </Providers>
         </React.StrictMode>
