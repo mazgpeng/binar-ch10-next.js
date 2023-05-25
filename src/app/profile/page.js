@@ -68,7 +68,7 @@ export default function profile () {
                             </Text>
                             <Spacer y={2} />
                             <Text h6 size={15} color="white" css={{ m: 0 }}>
-                            {/* {users && <p>{users.photoURL}</p>} */}
+                            {userfState.photoURL}
                             </Text>
                         </Row>
                         <Row justify="center" align="center">

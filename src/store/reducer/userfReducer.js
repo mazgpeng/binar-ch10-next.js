@@ -30,8 +30,8 @@ const userfSLice = createSlice({
 
 })
 
-const {changeDispname,changeEmail,changeUid} = userfSLice.actions
+const {changeDispname,changeEmail,changeUid,changePhotoURL} = userfSLice.actions
 const userfReducer = userfSLice.reducer
 
-export { changeDispname, changeEmail,changeUid, userfReducer}
+export { changeDispname, changeEmail,changeUid,changePhotoURL, userfReducer}
 
