@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Text, Container, Row, Button, Spacer, Card, Col, useSSR } from "@nextui-org/react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {useRouter} from 'next/navigation';
+import app from '@/service/firebase';
 import Image from "next/image";
 import css from '../page.module.css'
 import styles from './home.css';
@@ -13,6 +14,7 @@ import suit from '../images/suit.jpg';
 export default function home(){
 
     const navigate = useRouter()
+    const auth = getAuth(app)
     const [isLogin, setisLogin] = useState(false)
 
     useEffect(() => {
@@ -24,6 +26,12 @@ export default function home(){
 
     const [users, setUsers] = useState()
 
+    useEffect(() => {
+        onAuthStateChanged(auth, (data) => {
+        setUsers(data)
+        });
+    }, [])
+
 
     return (
         <>  
@@ -33,7 +41,7 @@ export default function home(){
                 <div className="container">
                     <div className="formhome">
                     <div className="container home-content rounded p-3 shadow">
-                    <h4 className="home-left text-light">Hi, Welcome {users && <h4>{users.displayName}</h4>} </h4>
+                    <h4 className="home-left text-light">Hi, Welcome {users && <span className="user-display-name">{users.displayName}</span>} </h4>
                     <p className="home-left text-light">Recomended Game For You</p>
                         <div className="home-box-game mb-3 rounded border">
                         <div className="p-3">
@@ -59,11 +67,13 @@ export default function home(){
                     </div>
                     </div>
                 </div>
-                {/* <Footer /> */}
+                
                 </div>
                 </div>
                 :
+                
                 <Container xs css={{ mt: "$40" }} >
+                    <div className="pleaselogin">
                 <Row justify="center" align="center">
                     <Col justify="center" align="center">
                     <Card css={{ $$cardColor: 'white' }}>
@@ -77,7 +87,9 @@ export default function home(){
                     </Card>
                     </Col>
                 </Row>
+                </div>
                 </Container>
+                
             }
         </>   
     );
