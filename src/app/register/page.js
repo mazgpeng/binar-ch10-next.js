@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import {useRouter} from 'next/navigation';
 import { getAuth, createUserWithEmailAndPassword} from "firebase/auth"
 import app from '@/service/firebase';
 import { Input, Button, Grid, Text  } from '@nextui-org/react';
@@ -9,6 +10,7 @@ import css from '../page.module.css'
 import styles from './register.css';
 
 export default function register () {
+    const navigate = useRouter()
     const [smShow, setSmShow] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
@@ -51,8 +53,15 @@ export default function register () {
                             <Input.Password labelPlaceholder="Password" width="250px"  value={credential.password} onChange={(e) => handleChangeInput(e, 'password')}/>
                             <Text color="warning" h7>Password should be 6-20 characters</Text>
                         </Grid>
+                        <Grid>
+                            <Button onClick={() => { setSmShow(true); handleSignUp(); }} auto color="success"> Sign Up </Button>
+                        </Grid>
+                        <Grid>
+                            <Button onClick={() => navigate.push("/login")} auto color="success"> Login </Button>
+                        </Grid>
                     </Grid.Container>
-                        <Button onClick={() => { setSmShow(true); handleSignUp(); }} auto color="success"> Sign Up </Button>
+                        <h3>Lupa password?</h3>
+                        <Button onClick={() => navigate.push("/forgotpassword")} auto color="success"> Reset Password! </Button>
                             {error && <Text color="error">{error}</Text>}
                             <Modal size="sm" show={success} onHide={() => setSuccess(false)} aria-labelledby="example-modal-sizes-title-sm"
                             > <Modal.Header closeButton> <Modal.Title id="example-modal-sizes-title-sm">

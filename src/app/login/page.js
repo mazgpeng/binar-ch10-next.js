@@ -96,7 +96,7 @@ export default function login() {
                                 <Button onClick={() => { setSmShow(true); handleLogin(); }} auto color="success" > Login </Button>
                             </Grid>
                             <div className="logoogle">
-                            <GoogleButton onClick={() => { setSmShow(true); loginWithGoogle(); }} /> 
+                                <GoogleButton onClick={() => { setSmShow(true); loginWithGoogle(); }} /> 
                             </div>
                         </Grid.Container>
                         {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -120,6 +120,7 @@ export default function login() {
                                 <Modal.Body> {error} </Modal.Body>
                             </Modal>
                         )}
+                        <Button onClick={() => navigate.push("/forgotpassword")} auto color="success"> Lupa Password? </Button>
                         <h3>Don't Have Account?</h3>
                         <Button onClick={() => navigate.push("/register")} auto color="success"> Register </Button>
                         </>
