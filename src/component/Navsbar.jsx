@@ -51,7 +51,7 @@ export default function Navsbar() {
           .then(() => {
             localStorage.removeItem('token');
             navigate.push('/login');
-            window.location.reload(); // Memperbarui seluruh halaman
+            window.location.reload(); 
           })
           .catch((error) => {
             alert("Something went wrong");

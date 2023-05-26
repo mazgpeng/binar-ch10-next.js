@@ -27,7 +27,7 @@ export default function login() {
 
     useEffect(() => {
         if (smShow && success) {
-            window.location.href = '/home'; // Memperbarui seluruh halaman setelah success dan modal muncul
+            window.location.href = '/home'; 
         }
     }, [smShow, success]);
     async function handleLogin() {
@@ -62,8 +62,7 @@ export default function login() {
             const token = credential.accessToken;
             localStorage.setItem('token', token);
             
-            navigate.push('/home');
-            window.location.reload(); 
+            window.location.href = '/home'; 
         } catch (err) {
             setError('Something went wrong');
             console.log(err);
