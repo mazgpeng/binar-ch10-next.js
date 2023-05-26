@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {useRouter} from 'next/navigation';
 import app from '@/service/firebase';
 import { GoogleAuthProvider, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
@@ -25,6 +25,11 @@ export default function login() {
         password: ''
     })
 
+    useEffect(() => {
+        if (smShow && success) {
+            window.location.href = '/home'; // Memperbarui seluruh halaman setelah success dan modal muncul
+        }
+    }, [smShow, success]);
     async function handleLogin() {
         if (!credential.email) {
             setError("Email is required")
@@ -41,9 +46,6 @@ export default function login() {
             setSuccess(true);
             setError('');
             setSmShow(true);
-            setTimeout(() => {
-                navigate.push('/home');
-            }, 1500);
 
         } catch (error) {
             setError("Wrong Password/Email")
@@ -53,21 +55,19 @@ export default function login() {
     }
 
     async function loginWithGoogle() {
-        auth.languageCode = 'it'
-        signInWithPopup(auth, provider)
-            .then(result => {
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken
-                localStorage.setItem('token', token)
-                setTimeout(() => {
-                    navigate.push('/home');
-                }, 1500);
-
-
-            })
-            .catch(err => {
-                setError('something wrong')
-            })
+        auth.languageCode = 'it';
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            localStorage.setItem('token', token);
+            
+            navigate.push('/home');
+            window.location.reload(); 
+        } catch (err) {
+            setError('Something went wrong');
+            console.log(err);
+        }
     }
 
     function handleChangeInput(e, type) {

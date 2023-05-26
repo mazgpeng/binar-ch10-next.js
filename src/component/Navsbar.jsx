@@ -47,16 +47,17 @@ export default function Navsbar() {
     }, [])
 
     function signout() {
-        signOut(auth, {
-
-        }).then(() => {
-            localStorage.removeItem('token')
-            navigate.push('/login')
-        }).catch((error) => {
-            alert("something wrong");
-            console.log(error)
-        });
-    };
+        signOut(auth)
+          .then(() => {
+            localStorage.removeItem('token');
+            navigate.push('/login');
+            window.location.reload(); // Memperbarui seluruh halaman
+          })
+          .catch((error) => {
+            alert("Something went wrong");
+            console.log(error);
+          });
+      };
 
 
 
