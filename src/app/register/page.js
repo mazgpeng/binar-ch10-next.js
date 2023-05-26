@@ -60,15 +60,15 @@ export default function register () {
                             <Button onClick={() => navigate.push("/login")} auto color="success"> Login </Button>
                         </Grid>
                     </Grid.Container>
+                        {error && <Text color="error">{error}</Text>}
                         <h3>Lupa password?</h3>
                         <Button onClick={() => navigate.push("/forgotpassword")} auto color="success"> Reset Password! </Button>
-                            {error && <Text color="error">{error}</Text>}
                             <Modal size="sm" show={success} onHide={() => setSuccess(false)} aria-labelledby="example-modal-sizes-title-sm"
                             > <Modal.Header closeButton> <Modal.Title id="example-modal-sizes-title-sm">
                                 Register
                                 </Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>{success && 'Sign up successfully'}</Modal.Body>
+                            <Modal.Body>{success && 'Sign up successfully silahkan  Login dan Update Name di Profile'}</Modal.Body>
                             </Modal>
                     </>
                 </div>
